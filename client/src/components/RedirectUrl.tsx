@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { SERVER_URL } from "../constants/constants";
 
 const RedirectUrl = () => {
   const [InvalidErrorstate, setInvalidErrorState] = useState<Boolean>(false);
@@ -7,7 +8,7 @@ const RedirectUrl = () => {
   const { slug } = useParams<{ slug: string }>();
 
   useEffect(() => {
-    fetch(`http://localhost:8000/url/redirect/${slug}`, {
+    fetch(`${SERVER_URL}/url/redirect/${slug}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",

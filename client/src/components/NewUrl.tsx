@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { SERVER_URL } from "../constants/constants";
 
 const NewUrl = () => {
   const [formData, setFormData] = useState<{ url: string }>({
@@ -14,7 +15,7 @@ const NewUrl = () => {
   }
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    fetch("http://localhost:8000/url/new", {
+    fetch(`${SERVER_URL}/url/new`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
