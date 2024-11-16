@@ -19,6 +19,9 @@ export const redirectOnClick = asyncHandler(async (req, res) => {
   const isValid = await Url.findOne({ slug: slug }); //verify that url exists
   appAssert(isValid, NOT_FOUND, "InvalidUrl");
 
+  isValid.clicks += 1;
+  await isValid.save();
+
   console.log(isValid.originalUrl);
   res.status(OK).json({ message: isValid.originalUrl });
 });
