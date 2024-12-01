@@ -4,7 +4,6 @@ import User from "../model/user.model";
 import cookieExtractor from "../utils/cookie";
 import { Request } from "express";
 import { JWT_SECRET } from "../constants/env";
-import { ObjectId } from "mongoose";
 
 const opts = {
   jwtFromRequest: (req: Request) => cookieExtractor(req), // ExtractJwt.fromAuthHeaderAsBearerToken(),

@@ -11,8 +11,10 @@ import "./middleware/passport";
 import passport from "passport";
 import morgan from "morgan";
 import profileRoutes from "./route/profile.route";
-import authenticate from "./middleware/authentication";
+import authenticate from "./middleware/parseId";
 import urlRoutes from "./route/url.route";
+import contactRouter from "./route/contact.route";
+import parseId from "./middleware/parseId";
 
 const app = express();
 
@@ -32,8 +34,9 @@ app.get("/health", (req, res) => {
 app.use("/auth", authRoutes);
 
 // protected routes
-app.use("/profile", passport.authenticate("jwt", { session: false }), authenticate, profileRoutes);
 app.use("/url", urlRoutes);
+app.use("/profile", passport.authenticate("jwt", { session: false }), parseId, profileRoutes);
+app.use("/contacts", passport.authenticate("jwt", { session: false }), parseId, contactRouter);
 
 app.use(errorHandler);
 

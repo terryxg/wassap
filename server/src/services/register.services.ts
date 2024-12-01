@@ -1,4 +1,4 @@
-import { CONFLICT } from "../constants/http";
+import { CONFLICT, UNPROCESSABLE_CONTENT } from "../constants/http";
 import User from "../model/user.model";
 import { CreateAccount } from "../utils/types";
 import appAssert from "./assert_error";
@@ -19,6 +19,7 @@ const Register = async (data: CreateAccount) => {
     newsletter: data.newsletter,
     password: data.password,
   });
+
   //sign tokens
   const accessToken = jwt.sign({ id: user?._id }, JWT_SECRET, { expiresIn: "15m" });
   return {
